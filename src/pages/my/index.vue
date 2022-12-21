@@ -4,16 +4,18 @@
   </view>
 </template>
 
-<script>
+<script setup>
+import Taro, { useTabItemTap, useLoad } from '@tarojs/taro'
 import { ref } from 'vue'
 import './index.scss'
 
-export default {
-  setup () {
-    const msg = ref('Hello world')
-    return {
-      msg
-    }
-  }
-}
+const msg = ref('Hello world')
+
+useLoad(() => {
+  console.log(1111111)
+});
+
+useTabItemTap(item => {
+  console.log(22222222)
+});
 </script>
