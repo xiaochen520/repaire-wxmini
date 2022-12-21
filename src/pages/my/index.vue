@@ -13,6 +13,7 @@ const msg = ref('Hello world')
 
 useLoad(() => {
   console.log(1111111)
+  Taro.getStorageSync('')
 });
 
 useTabItemTap(item => {
