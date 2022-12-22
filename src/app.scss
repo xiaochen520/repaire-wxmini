@@ -1,0 +1,180 @@
+/* float */
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clear::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+
+/* text-align */
+
+.tc {
+    text-align: center;
+}
+
+.tr {
+    text-align: right;
+}
+
+.tl {
+    text-align: left;
+}
+
+
+/* font */
+
+.b {
+    font-weight: bold;
+}
+
+
+/* flex */
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-w {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-c {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-r {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-sb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-sa {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-m {
+    display: flex;
+    align-items: center;
+}
+
+.flex-b {
+    display: flex;
+    align-items: flex-end;
+}
+
+.flex-bl {
+    display: flex;
+    align-items: baseline;
+}
+
+.flex-1 {
+    min-width: 0;
+    min-height: 0;
+    flex: 1;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0
+}
+
+/* 省略号 */
+.ellip {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.ellip-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* 窄边框 */
+.border-1 {
+    position: relative;
+}
+
+.border-1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5, 0.5);
+    box-sizing: border-box;
+    transform-origin: 0 0;
+}
+
+.border-hairline {
+    box-shadow: 0 0 0 0.5px #999;
+}
+
+.border-half-b {
+    position: relative;
+}
+
+.border-half-b::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(153, 153, 153, 0.3);
+    transform: scaleY(0.5);
+}
+
+/* 定位 */
+
+.pr {
+    position: relative;
+}
+
+.pa {
+    position: absolute;
+}
+
+.pf {
+    position: fixed;
+}
+
+.dib {
+    display: inline-block;
+}
+
+.vam {
+    vertical-align: middle;
+}
+
+.vat {
+    vertical-align: top;
+}
+
+.bgf {
+    background-color: #FFF;
+}

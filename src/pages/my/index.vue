@@ -46,16 +46,15 @@
 <script setup>
 import Taro, { useTabItemTap, useLoad } from '@tarojs/taro'
 import { ref } from 'vue'
+import { useLoginState } from '../../hooks/useUserInfo';
 import './index.scss'
 
+const { isLogin } = useLoginState();
 
-
-useLoad(() => {
-  console.log(1111111)
-  Taro.getStorageSync('isLogin');
-});
 
 useTabItemTap(item => {
-  console.log(22222222)
+  if(!isLogin.value) {
+    Taro.navigateTo({url: `../author/index?from=${encodeURI('/pages/my/index')}`})
+  }
 });
 </script>
