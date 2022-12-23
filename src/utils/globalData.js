@@ -1,3 +1,5 @@
 export default {
-    isLogin: ''
+    isLogin: '',
+    wxLoginCode: '',
+    wxUserInfo: null
 }

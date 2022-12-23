@@ -1,0 +1,26 @@
+
+.news {
+    padding: 0 24px;
+    .item {
+        padding: 24px;
+        background-color: #eee;
+        border-radius: 24px;
+        margin-bottom: 24px;
+        .left {
+            margin-right: 24px;
+            .title {
+                font-size: 48px;
+                font-weight: bold;
+                color: #333;
+            }
+            .desc {
+                font-size: 24px;
+                color: #666;
+                margin-top: 12px;
+            }
+        }
+        .at-icon-chevron-right {
+
+        }
+    }
+}

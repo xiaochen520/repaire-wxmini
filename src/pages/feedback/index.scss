@@ -1,0 +1,27 @@
+page {
+    background: #eaeaea;
+}
+.feedback {
+    padding: 24px 24px 0;
+    .textarea {
+        background: #fff;
+        border-radius: 24px;
+        padding: 24px;
+        box-sizing: border-box;
+    }
+
+    .upload-title {
+        color: #999;
+        font-size: 24px;
+        margin-top: 42px;
+        .w {
+            font-size: 32px;
+            color: #333;
+            margin-right: 12px;
+        }
+    }
+
+    .confirm-btn {
+        margin-top: 48px;
+    }
+}

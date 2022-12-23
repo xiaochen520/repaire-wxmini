@@ -1,0 +1,63 @@
+.my {
+    .top {
+        padding: 24px;
+        .head-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 120px;
+            margin-right: 12px;
+        }
+
+        .name {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+        }
+    }
+    .menu {
+        padding: 24px 0;
+        text-align: center;
+        &-item {
+            width: 50%;
+            .amount {
+                font-size: 48px;
+                font-weight: bold;
+                color: #333;
+            }
+            .text {
+                font-size: 32px;
+                color: #666;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    .utils {
+        margin-top: 24px;
+        padding: 0 24px;
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+        }
+        .list {
+            margin-top: 42px;
+            .item {
+                width: 25%;
+                .u-icon {
+                    width: 100px;
+                    height: 100px;
+                }
+                .u-text {
+                    font-size: 32px;
+                    color: #666;
+                    margin-top: 12px;
+                }
+            }
+        }
+    }
+
+    .exit-btn {
+        margin-top: 42px;
+    }
+}

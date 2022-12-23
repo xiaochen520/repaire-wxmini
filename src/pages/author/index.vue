@@ -1,40 +1,48 @@
 <template>
   <view class="index">
-    <AtButton type="primary" @click="getUserInfo">按钮文案</AtButton>
+    <button openType="getPhoneNumber" type="primary" @getPhoneNumber="getPhoneNumber">按钮文案</button>
   </view>
 </template>
 
 <script setup>
 import Taro, { useLoad } from "@tarojs/taro";
+import globalData from "../../utils/globalData";
+import { usePageQuery } from "../../hooks";
 import { ref } from "vue";
 import { get, post } from "../../api/request";
 import api from "../../api";
 import "./index.scss";
 
-function getUserInfo() {
-  let sessionKey = "";
-  Taro.login()
-    .then((res) => {
-      if (res.code) {
-        return get(api.wxAuthCode, { code: res.code });
-      }
-    })
-    .then((res) => {
-      if (res.result) {
-        sessionKey = res.result;
-        return Taro.getUserInfo();
-      }
-    })
-    .then((res) => {
+const query = usePageQuery();
+const { from } = query.value;
+
+function getPhoneNumber(res) {
+  if(res.detail.errMsg === "getPhoneNumber:ok") {
+    Taro.showLoading({mask: true});
+    get(api.getPhone, {code: res.detail.code}).then(res => {
       
-      const pars = {
-        ...res,
-        openid: sessionKey,
-        userInfo: JSON.stringify(res.userInfo)
-      };
-      return post(api.getUserInfo, pars);
-    }).then(res => {
-        console.log(222, res);
+    }).catch(() => {
+      Taro.hideLoading();
     });
+  }
+  
+  // Promise.all([Taro.login(), Taro.getUserProfile({ desc: "用户登录" })])
+  //   .then((values) => {
+  //     const res = values[0];
+  //     const res1 = values[1];
+  //     globalData.wxLoginCode = res.code;
+  //     globalData.wxUserInfo = res1;
+  //     Taro.navigateTo({
+  //       url: "/pages/login/index",
+  //     });
+  //   })
+  //   .catch((err) => {
+  //     Taro.showToast({
+  //       title: err.message,
+  //       icon: none,
+  //     });
+  //   });
+
+  
 }
 </script>

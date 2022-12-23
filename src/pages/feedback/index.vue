@@ -1,13 +1,13 @@
 <template>
   <view class="feedback">
-    <Textarea></Textarea>
-    <view>
-      <view></view>
-      <view></view>
+    <textarea class="textarea"></textarea>
+    <view class="upload-title flex-b">
+      <view class="w">上传照片</view>
+      <view>最多上传9张照片</view>
     </view>
     <view></view>
 
-    <AtButton loading type='primary'>按钮文案</AtButton>
+    <AtButton class="confirm-btn" type='primary'>按钮文案</AtButton>
   </view>
 </template>
 

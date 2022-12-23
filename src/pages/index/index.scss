@@ -1,35 +1,102 @@
 .index {
-    .title {
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 40px;
-    }
     .nav {
+        padding: 60px 0;
+
         .nav-item {
             width: 33.3333%;
+
             .icon {
-                width: 40px;
-                height: 40px;
+                width: 80px;
+                height: 80px;
             }
+
             .text {
-                font-size: 12px;
-                margin-top: 4px;
+                font-size: 28px;
+                margin-top: 8px;
             }
         }
     }
 
     .info {
-        font-size: 14px;
+        color: #333;
+        font-size: 32px;
+        padding: 24px;
+        &-title {
+            font-weight: bold;
+        }
+
+        &-sub-title {
+            color: #333;
+        }
+
+        &-desc {
+            margin-top: 8px;
+            font-size: 28px;
+        }
+    }
+
+    .menu {
+        text-align: center;
+        padding: 24px 0;
+
+        &-item {
+            width: 25%;
+            color: #333;
+            .data {
+                font-size: 48px;
+                font-weight: bold;
+            }
+            .text {
+                font-size: 24px;
+                color: #666;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    .banner {
+        margin-top: 24px;
+        padding: 0 24px;
+        &-img {
+            width: 100%;
+            height: 240px;
+        }
+    }
+
+    .news {
+        margin-top: 24px;
         color: #333;
         &-title {
-            
+            padding: 24px;
+            font-size: 28px;
+            .nt-icon {
+                margin-right: 6px;
+                font-size: 32px;
+            }
         }
-        &-sub-title {
-            
-        }
-        .desc {
+        &-list {
+            .news-item {
+                padding: 0 24px;
+                &-title {
+                    font-size: 32px;
+                    font-weight: bold;
+                }
+                &-desc {
+                    font-size: 28px;
+                    margin-top: 12px;
+                }
+                &-foot {
+                    margin-top: 12px;
+                    font-size: 24px;
+                    .news-item-time {
+                        
+                    }
 
+                    .news-item-label {
+
+                    }
+                }
+            }
         }
     }
 }
