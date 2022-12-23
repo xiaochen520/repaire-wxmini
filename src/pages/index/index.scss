@@ -1,0 +1,40 @@
+.index {
+    .nav {
+        padding: 60px 0;
+        .nav-item {
+            width: 33.3333%;
+            .icon {
+                width: 80px;
+                height: 80px;
+            }
+            .text {
+                font-size: 28px;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    .info {
+        font-size: 32px;
+        color: #333;
+        padding: 24px;
+        
+        &-title {
+            font-weight: bold;
+        }
+        &-sub-title {
+            font-size: 28px;
+            line-height: 60px;
+        }
+        .desc {
+
+        }
+    }
+
+    .menu {
+        text-align: center;
+        &-item {
+            width: 25%;
+        }
+    }
+}
