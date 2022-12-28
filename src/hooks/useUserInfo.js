@@ -1,4 +1,4 @@
-import Taro, { useLoad } from '@tarojs/taro';
+import Taro, { useLoad, useDidShow } from '@tarojs/taro';
 import { ref } from 'vue';
 import { isBoolean } from '../utils'
 import globalData from '../utils/globalData';
@@ -6,14 +6,24 @@ import globalData from '../utils/globalData';
 export function useLoginState() {
     const isLogin = ref(false);
     useLoad(() => {
-        if (isBoolean(globalData.isLogin)) {
-            isLogin.value = globalData.isLogin;
+        if (globalData.token) {
+            isLogin.value = true;
         } else {
-            isLogin.value = Taro.getStorageSync('islogin') || false;
-            globalData.isLogin = isLogin.value;
+            isLogin.value = Taro.getStorageSync('token') ? true : false;
         }
-
     })
 
     return { isLogin }
+}
+
+export function useUserInfo() {
+    const isLogin = ref(false);
+    const role = ref(-1);
+
+    useDidShow(() => {
+        isLogin.value = Boolean(globalData.token || Taro.getStorageSync('token'));
+        role.value = globalData.role || Taro.getStorageSync('role');
+    });
+    
+    return {isLogin, role};
 }

@@ -25,14 +25,20 @@ export default defineAppConfig({
     navigationBarTextStyle: 'black'
   },
   tabBar: {
+    color: '#666666',
+    selectedColor: '#6190E8',
     list: [
       {
         pagePath: 'pages/index/index',
-        text: '首页'
+        text: '首页',
+        iconPath: './imgs/tabs/home.png',
+        selectedIconPath: './imgs/tabs/home-active.png'
       },
       {
         pagePath: 'pages/my/index',
-        text: '我的'
+        text: '我的',
+        iconPath: './imgs/tabs/my.png',
+        selectedIconPath: './imgs/tabs/my-active.png'
       }
     ]
   }

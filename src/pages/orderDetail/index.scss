@@ -1,0 +1,26 @@
+.order-detail {
+    .head {
+        text-align: center;
+        padding: 24px 0;
+        .head-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+        }
+        .status-text {
+            font-size: 28px;
+            margin-top: 12px;
+        }
+    }
+    .info {
+        font-size: 28px;
+        padding: 0 24px;
+        .i-row {
+            padding: 16px 0;
+        }
+    }
+    .divider {
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+}

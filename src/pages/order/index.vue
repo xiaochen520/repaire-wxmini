@@ -1,6 +1,6 @@
 <template>
   <view class="order">
-    <view class="item">
+    <view @tap="goRouter({url: '/pages/orderDetail/index'})" class="item">
       <view class="head">工单编号</view>
       <view class="flex-m">
         <view class="flex-1 left">
@@ -28,5 +28,7 @@
 <script setup>
 import { ref } from 'vue'
 import './index.scss'
-const msg = ref('Hello world')
+import { goRouter as _goRouter } from '../../utils/index'
+
+const goRouter = _goRouter;
 </script>

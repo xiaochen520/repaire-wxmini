@@ -7,17 +7,17 @@
 
     <view class="row flex-m">
       <view class="text flex-1">用户名</view>
-      <view class="detail">大芒果</view>
+      <view class="detail">{{userInfo.nickName || ''}}</view>
       <view class="at-icon at-icon-chevron-right"></view>
     </view>
     <view class="row flex-m">
       <view class="text flex-1">手机号</view>
-      <view class="detail">15254525852</view>
+      <view class="detail">{{userInfo.phone || ''}}</view>
       <view class="at-icon at-icon-chevron-right"></view>
     </view>
     <view class="row flex-m">
       <view class="text flex-1">密码</view>
-      <view class="detail">1111111111</view>
+      <view class="detail">{{userInfo.psd || ''}}</view>
       <view class="at-icon at-icon-chevron-right"></view>
     </view>
   </view>
@@ -26,5 +26,8 @@
 <script setup>
 import { ref } from 'vue'
 import './index.scss'
-const msg = ref('Hello world')
+import globalData from '../../utils/globalData'
+
+const userInfo = ref(globalData.userInfo);
+
 </script>

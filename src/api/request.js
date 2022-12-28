@@ -1,7 +1,10 @@
 import Taro from '@tarojs/taro';
+import globalData from '../utils/globalData';
 
 export function request(option = {}) {
-    return Taro.request(option).then(res => {
+    const token = globalData.token || Taro.getStorageSync('token') || '';
+
+    return Taro.request({...option, header: {AuthCode: token}}).then(res => {
         return Promise.resolve(res.data);
     }).catch(err => {
         Taro.showToast({

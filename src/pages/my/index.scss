@@ -1,32 +1,44 @@
 .my {
     .top {
         padding: 24px;
+        background-color: #6190E8;
+        color: #fff;
         .head-img {
             width: 120px;
             height: 120px;
             border-radius: 120px;
-            margin-right: 12px;
+            margin-right: 24px;
         }
 
         .name {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: bold;
-            color: #333;
         }
     }
     .menu {
         padding: 24px 0;
         text-align: center;
+        background-color: #6190E8;
+        color: #fff;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 2px;
+            transform: scaleY(0.5);
+            background-color: #FAFBFC;
+        }
         &-item {
             width: 50%;
             .amount {
                 font-size: 48px;
                 font-weight: bold;
-                color: #333;
             }
             .text {
                 font-size: 32px;
-                color: #666;
                 margin-top: 8px;
             }
         }

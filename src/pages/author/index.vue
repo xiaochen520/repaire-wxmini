@@ -1,48 +1,85 @@
 <template>
-  <view class="index">
-    <button openType="getPhoneNumber" type="primary" @getPhoneNumber="getPhoneNumber">按钮文案</button>
+  <view class="author flex-m">
+    <button
+      class="author-btn"
+      openType="getPhoneNumber"
+      type="primary"
+      @getPhoneNumber="getPhoneNumber"
+    >
+      获取手机号
+    </button>
   </view>
 </template>
 
 <script setup>
-import Taro, { useLoad } from "@tarojs/taro";
-import globalData from "../../utils/globalData";
-import { usePageQuery } from "../../hooks";
-import { ref } from "vue";
-import { get, post } from "../../api/request";
-import api from "../../api";
+import Taro, {useLoad} from "@tarojs/taro"
+import globalData from "../../utils/globalData"
+import { post } from "../../api/request";
+import api from "../../api"
+import {goTab, goRouter} from '../../utils/index'
 import "./index.scss";
 
-const query = usePageQuery();
-const { from } = query.value;
+let pageFrom = '';
 
+useLoad(query => {
+  pageFrom = query.from;
+});
+
+// 获取手机号登陆
 function getPhoneNumber(res) {
-  if(res.detail.errMsg === "getPhoneNumber:ok") {
-    Taro.showLoading({mask: true});
-    get(api.getPhone, {code: res.detail.code}).then(res => {
-      
-    }).catch(() => {
-      Taro.hideLoading();
-    });
-  }
-  
-  // Promise.all([Taro.login(), Taro.getUserProfile({ desc: "用户登录" })])
-  //   .then((values) => {
-  //     const res = values[0];
-  //     const res1 = values[1];
-  //     globalData.wxLoginCode = res.code;
-  //     globalData.wxUserInfo = res1;
-  //     Taro.navigateTo({
-  //       url: "/pages/login/index",
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     Taro.showToast({
-  //       title: err.message,
-  //       icon: none,
-  //     });
-  //   });
+  if (res.detail.errMsg === "getPhoneNumber:ok") {
+    Taro.showLoading({ mask: true });
 
-  
+    Taro.login()
+      .then((loginRes) => {
+        if (loginRes.errMsg === "login:ok") {
+          return post(api.wxLogin, {
+            loginCode: loginRes.code,
+            phoneCode: res.detail.code,
+          });
+        } else {
+          Taro.showToast({
+            title: "登录失败",
+            icon: "none",
+          });
+        }
+      })
+      .then((res) => {
+        if (res.success) {
+          globalData.token = res.result.token;
+          globalData.roleList = res.result?.roleList || [];
+          globalData.role = globalData.roleList?.[0] || '';
+          Taro.setStorage({
+            key: 'token',
+            data: res.result.token
+          });
+
+          Taro.setStorage({
+            key: 'roleList',
+            data: JSON.stringify(globalData.roleList)
+          });
+
+          Taro.setStorage({
+            key: 'role',
+            data: JSON.stringify(globalData.roleList)
+          });
+
+          if(pageFrom.includes('pages/my') || pageFrom.includes('pages/index')) {
+            goTab({url: pageFrom});
+          } else {
+            goRouter({url: pageFrom});
+          }
+
+        } else {
+          Taro.showToast({
+            title: res.message,
+            icon: "none",
+          });
+        }
+      })
+      .catch((err) => {
+        Taro.hideLoading();
+      });
+  }
 }
 </script>

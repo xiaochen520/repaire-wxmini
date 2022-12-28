@@ -1,6 +1,5 @@
 const base = 'http://42.192.119.148'
 export default {
-    wxAuthCode: base + "/wxmini/api/wxAuthCode",
-    getUserInfo: base + "/wxmini/api/getUserInfo",
-    getPhone: base + "/wxmini/api/getPhone",
+    wxLogin: base + "/wxmini/api/wxLogin",
+    userDetail: base + "/maintenanceapi/user/detail", //用户详情
 }

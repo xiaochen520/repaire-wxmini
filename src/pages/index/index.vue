@@ -23,7 +23,7 @@
     </view>
 
     <view class="menu flex">
-      <view class="menu-item">
+      <view @tap="goRouter({url: '/pages/order/index'})" class="menu-item">
         <view class="data">255</view>
         <view class="text">待接单</view>
       </view>
@@ -46,7 +46,7 @@
     </view>
 
     <view class="news">
-      <view @tap="goNews" class="news-title flex-m">
+      <view @tap="goRouter({url: '/pages/news/index'})" class="news-title flex-m">
         <view class="at-icon at-icon-credit-card nt-icon"></view>
         <view class="flex-1">新闻公告</view>
         <view>更多</view>
@@ -68,22 +68,15 @@
 
 <script setup>
 import { ref } from 'vue'
-import Taro, { useLoad } from "@tarojs/taro";
-import { useLoginState } from '../../hooks/useUserInfo';
+import {useUserInfo} from '../../hooks/useUserInfo'
+import Taro, { useLoad } from "@tarojs/taro"
+import { use } from '../../hooks/useUserInfo'
+import { goRouter as _goRouter } from "../../utils/index"
 import './index.scss'
 
-const { isLogin } = useLoginState();
+const { isLogin, role } = useUserInfo();
+console.log(111, isLogin, role);
 
-
-function goNews() {
-  Taro.navigateTo({
-    url: "/pages/news/index"
-  })
-}
-
-function goRouter(options) {
-  console.log(options)
-  Taro.navigateTo(options)
-}
+const goRouter = _goRouter;
 
 </script>
