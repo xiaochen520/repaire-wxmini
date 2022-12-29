@@ -26,28 +26,28 @@
         <view @tap="goRouter({ url: '/pages/items/index' })" class="item">
           <image
             class="u-icon"
-            src="https://img1.baidu.com/it/u=1403245892,3051757811&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+            src="../../imgs/work.png"
           ></image>
           <view class="u-text">我的项目</view>
         </view>
         <view class="item" @tap="goRouter({ url: '/pages/message/index' })">
           <image
             class="u-icon"
-            src="https://img1.baidu.com/it/u=1403245892,3051757811&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+            src="../../imgs/my-email.png"
           ></image>
           <view class="u-text">消息中心</view>
         </view>
         <view class="item" @tap="goRouter({ url: '/pages/feedback/index' })">
           <image
             class="u-icon"
-            src="https://img1.baidu.com/it/u=1403245892,3051757811&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+            src="../../imgs/forward.png"
           ></image>
           <view class="u-text">意见反馈</view>
         </view>
         <view class="item">
           <image
             class="u-icon"
-            src="https://img1.baidu.com/it/u=1403245892,3051757811&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+            src="../../imgs/smile.png"
           ></image>
           <view class="u-text">关于我们</view>
         </view>

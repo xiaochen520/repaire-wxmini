@@ -18,6 +18,7 @@ export default defineAppConfig({
     'pages/progress/index',
     'pages/evaluate/index',
     'pages/editUser/index',
+    'pages/editPsd/index',
   ],
   window: {
     backgroundTextStyle: 'light',

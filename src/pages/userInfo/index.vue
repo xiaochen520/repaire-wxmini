@@ -15,7 +15,7 @@
       <view class="detail">{{userInfo.phone || ''}}</view>
       <view class="at-icon at-icon-chevron-right"></view>
     </view>
-    <view class="row flex-m">
+    <view class="row flex-m" @tap="goRouter({url: '/pages/editPsd/index'})">
       <view class="text flex-1">密码</view>
       <view class="detail">{{userInfo.psd || ''}}</view>
       <view class="at-icon at-icon-chevron-right"></view>
