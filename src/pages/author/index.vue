@@ -1,12 +1,18 @@
 <template>
   <view class="author flex-m">
     <button
-      class="author-btn"
+      class="author-btn flex-1 author-btn-left"
       openType="getPhoneNumber"
       type="primary"
       @getPhoneNumber="getPhoneNumber"
     >
-      获取手机号
+      微信授权登录
+    </button>
+    <button
+      class="author-btn flex-1"
+      @tap="goLogin"
+    >
+      账号密码登录
     </button>
   </view>
 </template>
@@ -18,6 +24,7 @@ import { post } from "../../api/request";
 import api from "../../api"
 import {goTab, goRouter} from '../../utils/index'
 import "./index.scss";
+
 
 let pageFrom = '';
 
@@ -81,5 +88,10 @@ function getPhoneNumber(res) {
         Taro.hideLoading();
       });
   }
+}
+
+// 去账号密码登录
+function goLogin() {
+  goRouter({url: '/pages/login/index?from=' + encodeURI(pageFrom)});
 }
 </script>

@@ -5,12 +5,12 @@
       <image class="head-img" src="https://img1.baidu.com/it/u=1403245892,3051757811&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"></image>
     </view>
 
-    <view class="row flex-m">
+    <view @tap="goRouter({url: '/pages/editUser/index?key=nickName'})" class="row flex-m">
       <view class="text flex-1">用户名</view>
       <view class="detail">{{userInfo.nickName || ''}}</view>
       <view class="at-icon at-icon-chevron-right"></view>
     </view>
-    <view class="row flex-m">
+    <view @tap="goRouter({url: '/pages/editUser/index?key=phone'})" class="row flex-m">
       <view class="text flex-1">手机号</view>
       <view class="detail">{{userInfo.phone || ''}}</view>
       <view class="at-icon at-icon-chevron-right"></view>
@@ -25,9 +25,16 @@
 
 <script setup>
 import { ref } from 'vue'
+import {goRouter as _goRouter} from '../../utils'
+import Taro, { useDidShow } from "@tarojs/taro"
 import './index.scss'
 import globalData from '../../utils/globalData'
 
 const userInfo = ref(globalData.userInfo);
+const goRouter = _goRouter;
+
+useDidShow(() => {
+  userInfo.value = {...globalData.userInfo};
+});
 
 </script>

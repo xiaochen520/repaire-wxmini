@@ -70,7 +70,7 @@
 import { ref } from 'vue'
 import {useUserInfo} from '../../hooks/useUserInfo'
 import Taro, { useLoad } from "@tarojs/taro"
-import { use } from '../../hooks/useUserInfo'
+// import { use } from '../../hooks/useUserInfo'
 import { goRouter as _goRouter } from "../../utils/index"
 import './index.scss'
 

@@ -20,8 +20,9 @@ export function loading() {
 }
 
 export function toast(text) {
-    Taro.showToast({
+    return Taro.showToast({
         title: text,
-        icon: 'none'
+        icon: 'none',
+        duration: 1500
     });
 }

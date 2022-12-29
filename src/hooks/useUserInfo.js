@@ -1,7 +1,9 @@
-import Taro, { useLoad, useDidShow } from '@tarojs/taro';
+import Taro, { useLoad, useDidShow } from '@tarojs/taro'
 import { ref } from 'vue';
 import { isBoolean } from '../utils'
-import globalData from '../utils/globalData';
+import globalData from '../utils/globalData'
+import {post} from '../api/request'
+import api from '../api'
 
 export function useLoginState() {
     const isLogin = ref(false);

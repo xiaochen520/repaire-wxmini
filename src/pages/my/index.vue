@@ -54,17 +54,20 @@
       </view>
     </view>
 
-    <AtButton type="primary" class="exit-btn">退出登录</AtButton>
+    <view class="exit-btn">
+      <AtButton @click="exitLogin" type="primary">退出登录</AtButton>
+    </view>
+    
   </view>
 </template>
 
 <script setup>
-import Taro, { useTabItemTap, useLoad } from "@tarojs/taro"
+import Taro, { useTabItemTap, useDidShow } from "@tarojs/taro"
 import { ref, watchEffect } from "vue"
 import globalData from '../../utils/globalData';
 import api from '../../api'
 import { get, post } from "../../api/request"
-import { goRouter as _goRouter, loading } from "../../utils"
+import { goRouter as _goRouter, toast } from "../../utils"
 import { useUserInfo } from "../../hooks/useUserInfo"
 import "./index.scss";
 
@@ -72,12 +75,14 @@ const { isLogin } = useUserInfo();
 const userInfo = ref({});
 const goRouter = _goRouter;
 
-
-
-watchEffect(() => {
+// 生命周期
+useDidShow(() => {
   if(isLogin.value) {
     // 获取用户信息
     getUserDetail();
+  } else {
+    globalData.userInfo = null;
+    userInfo.value = {};
   }
 });
 
@@ -88,14 +93,32 @@ useTabItemTap((item) => {
 });
 
 function getUserDetail() {
-  loading();
+  
   get(api.userDetail).then(res => {
     if(res.success) {
-      Taro.hideLoading();
       globalData.userInfo = res.result;
       userInfo.value = res.result;
     } else {
-      Taro.showToast({title: res.message, icon: 'none'});
+      toast(res.message);
+    }
+  });
+}
+
+// 退出登录
+function exitLogin() {
+  Taro.showModal({
+    title: '提示',
+    content: '确认要退出登录?'
+  }).then(res => {
+    
+    if(res.confirm) {
+      globalData.token = '';
+      globalData.roleList = [];
+      globalData.role = -1;
+      Taro.removeStorageSync('token');
+      Taro.removeStorageSync('roleList');
+      Taro.removeStorageSync('role');
+      Taro.redirectTo({ url: `../author/index?from=/pages/my/index` });
     }
   });
 }
