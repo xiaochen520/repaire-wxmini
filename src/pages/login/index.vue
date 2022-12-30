@@ -28,7 +28,7 @@ import { post } from "../../api/request";
 import api from "../../api";
 import { toast } from "../../utils/index";
 import globalData from "../../utils/globalData";
-import { goTab, goRouter } from "../../utils";
+import { goTab, goRouter, setStorageData } from "../../utils";
 import "./index.scss";
 
 const saveLoad = ref(false);
@@ -59,21 +59,14 @@ function confirm() {
     if (res.success) {
       globalData.token = res.result.token;
       globalData.roleList = res.result?.roleList || [];
-      globalData.role = globalData.roleList?.[0] || "";
-      Taro.setStorage({
-        key: "token",
-        data: res.result.token,
-      });
+      globalData.projectList = res.result?.projectList || [];
+      const storageObj = {
+        token: globalData.token,
+        roleList: JSON.stringify(globalData.roleList),
+        projectList: JSON.stringify(globalData.projectList)
+      };
 
-      Taro.setStorage({
-        key: "roleList",
-        data: JSON.stringify(globalData.roleList),
-      });
-
-      Taro.setStorage({
-        key: "role",
-        data: JSON.stringify(globalData.roleList),
-      });
+      setStorageData(storageObj);
       if (pageFrom.includes("pages/my") || pageFrom.includes("pages/index")) {
         goTab({ url: pageFrom });
       } else {

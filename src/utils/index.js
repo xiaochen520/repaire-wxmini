@@ -26,3 +26,15 @@ export function toast(text) {
         duration: 1500
     });
 }
+
+export function setStorageData(map) {
+    for (const key in map) {
+        if (Object.hasOwnProperty.call(map, key)) {
+            const element = map[key];
+            Taro.setStorage({
+                key,
+                data: element
+              });
+        }
+    }
+}

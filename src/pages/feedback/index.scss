@@ -1,11 +1,12 @@
 page {
-    background: #eaeaea;
+    background: #F7F8FA;
 }
 .feedback {
     padding: 24px 24px 0;
     .textarea {
         background: #fff;
         border-radius: 24px;
+        font-size: 32px;
         padding: 24px;
         box-sizing: border-box;
     }
@@ -21,7 +22,23 @@ page {
         }
     }
 
+    .img-list {
+        margin-top: 24px;
+        .img-item {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+        }
+        .camera {
+            box-sizing: border-box;
+            border: 1px dashed #999;
+            .at-icon-camera {
+                color: #999;
+            }
+        }
+    }
+
     .confirm-btn {
-        margin-top: 48px;
+        margin-top: 120px;
     }
 }

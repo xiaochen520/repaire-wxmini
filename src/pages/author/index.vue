@@ -22,7 +22,7 @@ import Taro, {useLoad} from "@tarojs/taro"
 import globalData from "../../utils/globalData"
 import { post } from "../../api/request";
 import api from "../../api"
-import {goTab, goRouter} from '../../utils/index'
+import {goTab, goRouter, setStorageData} from '../../utils/index'
 import "./index.scss";
 
 
@@ -55,21 +55,14 @@ function getPhoneNumber(res) {
         if (res.success) {
           globalData.token = res.result.token;
           globalData.roleList = res.result?.roleList || [];
-          globalData.role = globalData.roleList?.[0] || '';
-          Taro.setStorage({
-            key: 'token',
-            data: res.result.token
-          });
-
-          Taro.setStorage({
-            key: 'roleList',
-            data: JSON.stringify(globalData.roleList)
-          });
-
-          Taro.setStorage({
-            key: 'role',
-            data: JSON.stringify(globalData.roleList)
-          });
+          globalData.projectList = res.result?.projectList || [];
+          const storageObj = {
+            token: globalData.token,
+            roleList: JSON.stringify(globalData.roleList),
+            projectList: JSON.stringify(globalData.projectList)
+          }
+          
+          setStorageData(storageObj);
 
           if(pageFrom.includes('pages/my') || pageFrom.includes('pages/index')) {
             goTab({url: pageFrom});
