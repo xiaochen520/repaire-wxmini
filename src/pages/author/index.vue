@@ -56,8 +56,10 @@ function getPhoneNumber(res) {
           globalData.token = res.result.token;
           globalData.roleList = res.result?.roleList || [];
           globalData.projectList = res.result?.projectList || [];
+          globalData.role = globalData.roleList[0] || null;
           const storageObj = {
             token: globalData.token,
+            role: JSON.stringify(globalData.role),
             roleList: JSON.stringify(globalData.roleList),
             projectList: JSON.stringify(globalData.projectList)
           }

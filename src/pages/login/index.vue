@@ -60,7 +60,9 @@ function confirm() {
       globalData.token = res.result.token;
       globalData.roleList = res.result?.roleList || [];
       globalData.projectList = res.result?.projectList || [];
+      globalData.role = globalData.roleList[0] || null;
       const storageObj = {
+        role: JSON.stringify(globalData.role),
         token: globalData.token,
         roleList: JSON.stringify(globalData.roleList),
         projectList: JSON.stringify(globalData.projectList)

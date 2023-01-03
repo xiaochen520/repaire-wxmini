@@ -42,10 +42,13 @@ page {
 
     .menu {
         text-align: center;
-        padding: 24px 0;
-
+        padding: 24px;
+        .outer {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 24px 0;
+        }
         &-item {
-            width: 25%;
             color: #333;
             .data {
                 font-size: 48px;
@@ -74,17 +77,23 @@ page {
         color: #333;
         &-title {
             padding: 24px;
-            font-size: 36px;
+            font-size: 32px;
             .nt-icon {
                 margin-right: 6px;
-                font-size: 32px;
+                font-size: 36px;
+                color: #6190E8;
+            }
+            .nt-more {
+                color: #6190E8;
             }
         }
         &-list {
             .news-item {
                 padding: 24px;
+                background-color: #fff;
+                margin-bottom: 24px;
                 &-title {
-                    font-size: 32px;
+                    font-size: 28px;
                     font-weight: bold;
                 }
                 &-desc {

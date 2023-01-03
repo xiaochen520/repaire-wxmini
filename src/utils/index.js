@@ -5,7 +5,6 @@ export function isBoolean(bool) {
 }
 
 export function goRouter(options) {
-    console.log(options)
     Taro.navigateTo(options)
 }
 

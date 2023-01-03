@@ -1,19 +1,37 @@
+import Taro, { useLoad, useDidShow } from '@tarojs/taro'
+import globalData from '../utils/globalData';
+import api from '../api'
 export function useUploadImg() {
 
-    function chooseImgs() {
-        Taro.chooseImage().then(res => {
-          console.log(111, res);
-          if(res.errMsg === "chooseImage:ok") {
-            if(imgList.length + res.tempFilePaths.length > maxImgAmount) {
-              toast(`只能上传${maxImgAmount}张图片`);
-            } else {
-              uploadImg(res.tempFilePaths);
-            }
-          } else {
-            toast(res.errMsg);
-          }
-        }).catch(err => {
-          toast('选择图片失败');
-        });
+  function chooseImgs() {
+    return Taro.chooseImage().then(res => {
+      if (res.errMsg === "chooseImage:ok") {
+        return Promise.resolve(res.tempFilePaths);
+      } else {
+        return Promise.reject(res.errMsg);
       }
+    }).catch(err => {
+      return Promise.reject(err);
+      toast('选择图片失败');
+    });
+  }
+
+  // 上传图片
+  function uploadImg(imgs) {
+    const fetchArr = [];
+    imgs.forEach(e => {
+      fetchArr.push(Taro.uploadFile({
+        url: api.uploadFile,
+        filePath: e,
+        name: 'file',
+        header: {
+          AuthCode: globalData.token || Taro.getStorageSync('token') || ''
+        }
+      }))
+    });
+    
+    return Promise.all(fetchArr)
+  }
+
+  return { chooseImgs, uploadImg }
 }

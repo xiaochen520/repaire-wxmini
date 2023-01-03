@@ -19,6 +19,8 @@ export default defineAppConfig({
     'pages/evaluate/index',
     'pages/editUser/index',
     'pages/editPsd/index',
+    'pages/messageDetail/index',
+    'pages/allot/index',
   ],
   window: {
     backgroundTextStyle: 'light',

@@ -9,4 +9,15 @@ export default {
     newDetail: base + "/maintenanceapi/maintenanceannouncement/detail", //新闻详情
     itemList: base + "/maintenanceapi/maintenanceproject/list", //项目列表
     itemDetail: base + "/maintenanceapi/maintenanceproject/detail", //项目详情
+    uploadFile: base + "/maintenanceapi/user/uploadFile",
+    submitFeedback: base + "/maintenanceapi/maintenancefeedback/submit", //反馈
+    msgList: base + "/maintenanceapi/maintenancemessage/list", //消息列表
+    homeMaintenanceData: base + "/maintenanceapi/maintenanceorder/homeMaintenanceData", //首页工单数据
+    selectOrderList: base + "/maintenanceapi/maintenanceorder/selectOrderList", //工单列表
+    orderDetail: base + "/maintenanceapi/maintenanceorder/orderDetail", //工单详情
+    submitApply: base + "/maintenanceapi/maintenanceorder/submitApply", //工单申请
+    msgDetail: base + "/maintenanceapi/maintenancemessage/detail", //消息详情
+    orderProgressList: base + "/maintenanceapi/maintenanceorder/orderProgressList", //进度查询
+    myOrderCount: base + "/maintenanceapi/user/myOrderCount", //我的工单
+    repairList: base + "/maintenanceapi/user/repairList", //维修员列表
 }

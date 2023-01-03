@@ -1,0 +1,45 @@
+page {
+    background-color: #F7F8FA;
+    min-height: 100%;
+}
+.allot {
+    padding: 0 24px;
+    .header {
+        padding: 24px 0;
+        .outer {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            .at-icon-search {
+                margin-right: 12px;
+            }
+            .search-input {
+                font-size: 32px;
+            }
+        }
+    }
+    .list {
+        background-color: #fff;
+        margin-top: 24px;
+        padding: 0 24px;
+        border-radius: 12px;
+        .item {
+            padding: 24px 0;
+            border-bottom: 1px solid #F2F3F5;
+            &:last-child {
+                border-color: transparent;
+            }
+            .head-form {
+                margin-right: 24px;
+            }
+            .head-img {
+                width: 120px;
+                height: 120px;
+                margin-right: 24px;
+            }
+            .name {
+                font-size: 32px;
+            }
+        }
+    }
+}

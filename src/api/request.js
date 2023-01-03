@@ -8,7 +8,7 @@ export function request(option = {}) {
         return Promise.resolve(res.data);
     }).catch(err => {
         Taro.showToast({
-            title: err.message,
+            title: err,
             icon: 'none'
         })
         return Promise.reject(err);

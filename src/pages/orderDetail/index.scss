@@ -23,4 +23,21 @@
         padding: 0 24px;
         box-sizing: border-box;
     }
+    .detail {
+        padding: 24px;
+        font-size: 28px;
+    }
+    .progress {
+        padding: 0 24px;
+    }
+    .footer {
+        padding: 24px;
+        margin-top: 50px;
+        .button {
+            margin-right: 24px;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
 }
