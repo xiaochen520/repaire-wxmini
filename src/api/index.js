@@ -20,4 +20,5 @@ export default {
     orderProgressList: base + "/maintenanceapi/maintenanceorder/orderProgressList", //进度查询
     myOrderCount: base + "/maintenanceapi/user/myOrderCount", //我的工单
     repairList: base + "/maintenanceapi/user/repairList", //维修员列表
+    managerDispatchOrder: base + "/maintenanceapi/maintenanceorder/managerDispatchOrder", //经理派单
 }

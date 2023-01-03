@@ -42,4 +42,25 @@ page {
             }
         }
     }
+
+    .msg {
+        .m-title {
+            font-size: 32px;
+            color: #333;
+            font-weight: 600;
+            margin-top: 24px;
+        }
+        .msg-input {
+            width: 100%;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            margin-top: 24px;
+            padding: 24px;
+            font-size: 28px;
+        }
+    }
+
+    .footer {
+        margin-top: 42px;
+    }
 }

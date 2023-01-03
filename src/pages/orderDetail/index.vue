@@ -57,14 +57,17 @@
     </view>
 
     <view v-if="manager && orderInfo.status === 1" class="footer flex-m">
-      <AtButton @click="goRouter({url: '/pages/allot/index?projectId=' + orderInfo.projectId})" class="button flex-1" type="primary">分配维保人员</AtButton>
-      <AtButton class="button flex-1" type="primary">结束工单</AtButton>
+      <AtButton @click="goAllotPage" class="button flex-1" type="primary">分配维保人员</AtButton>
+      <AtButton @click="rejectOrder" class="button flex-1" type="primary">结束工单</AtButton>
     </view>
 
     <view v-if="ower && orderInfo.status === 4" class="footer flex-m">
       <AtButton class="button flex-1" type="primary">确认</AtButton>
       <AtButton class="button flex-1" type="primary">拒绝</AtButton>
     </view>
+
+    <!-- 拒绝弹框 -->
+    <nut-popup v-model:visible="showCloseModal">正文</nut-popup>
   </view>
 </template>
 
@@ -79,12 +82,14 @@ import "./index.scss";
 import Taro, { useLoad, useDidShow } from "@tarojs/taro";
 import { get } from "../../api/request";
 import { goRouter, loading, toast } from "../../utils/index";
+import globalData from '../../utils/globalData'
 import api from "../../api";
 
 const { isLogin, role, project } = useUserInfo();
 const orderInfo = ref(null);
 const progressList = ref([]);
 const orderStatus = ref(ORDER_STATUS);
+const showCloseModal = ref(false);
 let orderId = "";
 
 const service = computed(() => {
@@ -121,5 +126,19 @@ function getDetail() {
       toast(res.message);
     }
   });
+}
+
+function goAllotPage() {
+  if(!orderInfo.value) {
+    toast('没有获取到订单信息');
+    return;
+  }
+
+  globalData.orderInfo = orderInfo.value;
+  goRouter({url: '/pages/allot/index'});
+}
+
+function rejectOrder() {
+  showCloseModal.value = true;
 }
 </script>
