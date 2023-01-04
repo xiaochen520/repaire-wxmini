@@ -3,64 +3,64 @@ page {
     min-height: 100%;
 }
 .allot {
-    padding: 0 24px;
+    padding: 0 12px;
     .header {
-        padding: 24px 0;
+        padding: 12px 0;
         .outer {
             background-color: #fff;
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 6px;
+            padding: 12px;
             .at-icon-search {
-                margin-right: 12px;
+                margin-right: 6px;
             }
             .search-input {
-                font-size: 32px;
+                font-size: 16px;
             }
         }
     }
     .list {
         background-color: #fff;
-        margin-top: 24px;
-        padding: 0 24px;
-        border-radius: 12px;
+        margin-top: 12px;
+        padding: 0 12px;
+        border-radius: 6px;
         .item {
-            padding: 24px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #F2F3F5;
             &:last-child {
                 border-color: transparent;
             }
             .head-form {
-                margin-right: 24px;
+                margin-right: 6px;
             }
             .head-img {
-                width: 120px;
-                height: 120px;
-                margin-right: 24px;
+                width: 60px;
+                height: 60px;
+                margin-right: 6px;
             }
             .name {
-                font-size: 32px;
+                font-size: 16px;
             }
         }
     }
 
     .msg {
         .m-title {
-            font-size: 32px;
+            font-size: 16px;
             color: #333;
             font-weight: 600;
-            margin-top: 24px;
+            margin-top: 12px;
         }
         .msg-input {
             width: 100%;
             background-color: #FFFFFF;
-            border-radius: 12px;
-            margin-top: 24px;
-            padding: 24px;
-            font-size: 28px;
+            border-radius: 6px;
+            margin-top: 12px;
+            padding: 12px;
+            font-size: 14px;
         }
     }
 
     .footer {
-        margin-top: 42px;
+        margin-top: 20px;
     }
 }

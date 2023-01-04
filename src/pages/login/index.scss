@@ -1,13 +1,16 @@
 .login {
-    padding: 0 24px;
+    padding: 0 12px;
     .row {
-        padding: 24px 0;
+        padding: 12px 0;
         .label {
-            width: 120px;
-            font-size: 36px;
+            width: 60px;
+            font-size: 18px;
         }
     }
     .confirm-btn {
-        margin-top: 120px;
+        margin-top: 60px;
+        .button {
+            width: 100%;
+        }
     }
 }

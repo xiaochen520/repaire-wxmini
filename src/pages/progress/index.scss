@@ -1,20 +1,20 @@
 .progress {
-    padding: 0 24px;
+    padding: 0 12px;
     .item {
         color: #333;
         background-color: #eee;
-        border-radius: 24px;
-        padding: 24px;
-        margin-bottom: 24px;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
         .head {
-            font-size: 32px;
+            font-size: 16px;
             font-weight: bold;
             padding: 12px 0;
         }
         .left {
             .desc {
-                font-size: 28px;
-                line-height: 48px;
+                font-size: 14px;
+                line-height: 24px;
             }
         }
     }

@@ -8,7 +8,7 @@
           <view class="desc">项目名称：{{item.projectName}}</view>
           <view class="desc">下单时间：{{item.createTime}}</view>
         </view>
-        <AtButton @click="goRouter({url: '/pages/orderDetail/index?id=' + item.id})" :circle="true" size="small" type='primary'>详情</AtButton>
+        <nut-button @click="goRouter({url: '/pages/orderDetail/index?id=' + item.id})" size="small" type="info">详情</nut-button>
       </view>
     </view>
   </view>

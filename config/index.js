@@ -1,6 +1,6 @@
 const config = {
   projectName: 'repaire',
-  date: '2022-12-19',
+  date: '2023-1-4',
   designWidth: 375,
   deviceRatio: {
     640: 2.34 / 2,
@@ -53,6 +53,7 @@ const config = {
   h5: {
     publicPath: '/',
     staticDirectory: 'static',
+    esnextModules: ['nutui-taro'],
     postcss: {
       autoprefixer: {
         enable: true,

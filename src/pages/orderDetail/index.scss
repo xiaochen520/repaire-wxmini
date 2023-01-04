@@ -1,43 +1,89 @@
 .order-detail {
     .head {
         text-align: center;
-        padding: 24px 0;
+        padding: 12px 0;
         .head-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: 100px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
         }
         .status-text {
-            font-size: 28px;
+            font-size: 14px;
             margin-top: 12px;
         }
     }
     .info {
-        font-size: 28px;
-        padding: 0 24px;
+        font-size: 14px;
+        padding: 0 12px;
         .i-row {
             padding: 16px 0;
         }
     }
     .divider {
-        padding: 0 24px;
+        padding: 0 12px;
         box-sizing: border-box;
     }
     .detail {
-        padding: 24px;
-        font-size: 28px;
+        padding: 12px;
+        font-size: 14px;
+        .img-list {
+            margin-top: 12px;
+            .img-item {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 12px;
+                margin-right: 12px;
+                image {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
     }
     .progress {
-        padding: 0 24px;
+        padding: 0 12px;
     }
     .footer {
-        padding: 24px;
-        margin-top: 50px;
+        padding: 12px;
+        margin-top: 25px;
         .button {
-            margin-right: 24px;
+            margin-right: 6px;
             &:last-child {
                 margin-right: 0;
             }
         }
+    }
+
+    .refuse-modal {
+        padding: 0 12px;
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 75px;
+        }
+
+        .sub-title {
+            font-size: 16px;
+        }
+
+        .textarea {
+            width: 100%;
+            height: 120px;
+            border-radius: 6px;
+            padding: 12px;
+            box-sizing: border-box;
+            font-size: 14px;
+            margin-top: 12px;
+            background-color: #F7F8FA;
+        }
+        .r-button-box {
+            width: 100%;
+            padding: 12px 0;
+            .r-button {
+                width: 100%;
+            }
+        }
+        
     }
 }

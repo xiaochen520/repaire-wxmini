@@ -21,4 +21,6 @@ export default {
     myOrderCount: base + "/maintenanceapi/user/myOrderCount", //我的工单
     repairList: base + "/maintenanceapi/user/repairList", //维修员列表
     managerDispatchOrder: base + "/maintenanceapi/maintenanceorder/managerDispatchOrder", //经理派单
+    repairReceiveOrder: base + "/maintenanceapi/maintenanceorder/repairReceiveOrder", //维修员拒绝
+    repairCompleteOrder: base + "/maintenanceapi/maintenanceorder/repairCompleteOrder", //维修员完成
 }

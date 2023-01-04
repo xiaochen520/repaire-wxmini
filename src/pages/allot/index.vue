@@ -22,7 +22,6 @@
           <checkbox
             class="head-form"
             :value="item.id"
-            v-model="item.select"
           ></checkbox>
           <image
             v-if="item.headPortrait"

@@ -45,5 +45,8 @@ export default defineAppConfig({
         selectedIconPath: './imgs/tabs/my-active.png'
       }
     ]
-  }
+  },
+  requiredPrivateInfos: [
+    'chooseLocation'
+  ]
 })

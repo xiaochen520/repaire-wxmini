@@ -48,10 +48,10 @@
         mode="selector"
         @change="changeRolePicker"
       >
-        <AtButton class="exchange" type="primary">切换角色</AtButton>
+        <nut-button class="exchange" type="info">切换角色</nut-button>
       </picker>
 
-      <AtButton @click="exitLogin" type="primary">退出登录</AtButton>
+      <nut-button class="exit" @click="exitLogin" type="info">退出登录</nut-button>
     </view>
   </view>
 </template>

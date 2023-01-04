@@ -2,7 +2,7 @@
   <view class="apply">
     <view class="block">
       <view class="form-row flex-m">
-        <view class="label">所属项目：</view>
+        <view class="label require">所属项目：</view>
         <picker
           :range="itemList"
           class="input flex-1"
@@ -13,17 +13,25 @@
           @change="changeProjectPicker"
         >
           <view class="flex-m">
-            <view class="flex-1">{{(itemList[projectPickerIndex] && itemList[projectPickerIndex].projectManagerName) || '请选择项目'}}</view>
-            <view class='at-icon at-icon-chevron-right'></view>
+            <view class="flex-1">{{
+              (itemList[projectPickerIndex] &&
+                itemList[projectPickerIndex].projectManagerName) ||
+              "请选择项目"
+            }}</view>
+            <view class="at-icon at-icon-chevron-right"></view>
           </view>
         </picker>
       </view>
       <view class="form-row flex-m">
-        <view class="label">项目经理：</view>
-        <view class="input flex-1">{{(itemList[projectPickerIndex] && itemList[projectPickerIndex].projectName) || ''}}</view>
+        <view class="label require">项目经理：</view>
+        <view class="input flex-1">{{
+          (itemList[projectPickerIndex] &&
+            itemList[projectPickerIndex].projectName) ||
+          ""
+        }}</view>
       </view>
       <view class="form-row">
-        <view class="label">问题描述：</view>
+        <view class="label require">问题描述：</view>
         <textarea
           placeholder="请输入您要提交的内容"
           v-model="formData.problemDescribe"
@@ -54,33 +62,67 @@
     </view>
 
     <view class="block">
-      <view class="form-row flex-m">
-        <view class="label">维保地址：</view>
-        <view @tap="getLocation" class="flex-1"></view>
-        <view @tap="getLocation" class="at-icon at-icon-map-pin"></view>
+      <view @tap="getLocation" class="form-row flex-m">
+        <view class="label require">维保地址：</view>
+        <view class="flex-1">{{
+          formData.maintenanceAddress || "选择维保地址"
+        }}</view>
+        <view class="at-icon at-icon-map-pin"></view>
       </view>
       <view class="form-row flex-m">
-        <view class="label">详细地址：</view>
-        <input v-model="formData.maintenanceHouseNumber" class="input flex-1" type="text" />
+        <view class="label require">门牌号：</view>
+        <input
+          v-model="formData.maintenanceHouseNumber"
+          class="input flex-1"
+          type="text"
+        />
       </view>
 
+      <picker
+        :range="timeList"
+        header-text="选择上门时间"
+        :value="timePickerIndex"
+        mode="selector"
+        @change="changeTimePicker"
+      >
+        <view class="form-row flex-m">
+          <view class="label require">上门时间：</view>
+          <view class="flex-1">{{ timeList[timePickerIndex] }}</view>
+          <view class="at-icon at-icon-chevron-right"></view>
+        </view>
+      </picker>
+      <nut-datepicker
+        v-model="applyTime"
+        type="datetime"
+        v-model:visible="showTimePicker"
+        :min-date="minDate"
+        :is-show-chinese="true"
+      ></nut-datepicker>
       <view class="form-row flex-m">
-        <view class="label">上门时间：</view>
-        <view class="flex-1"></view>
+        <view class="label require">联系人：</view>
+        <input
+          v-model="formData.contactPerson"
+          class="input flex-1"
+          type="text"
+        />
       </view>
       <view class="form-row flex-m">
-        <view class="label">联系人：</view>
-        <input v-model="formData.contactPerson" class="input flex-1" type="text" />
-      </view>
-      <view class="form-row flex-m">
-        <view class="label">电话：</view>
-        <input v-model="formData.contactNumber" class="input flex-1" type="text" />
+        <view class="label require">电话：</view>
+        <input
+          v-model="formData.contactNumber"
+          class="input flex-1"
+          type="text"
+        />
       </view>
     </view>
 
     <view class="footer flex-m">
-      <AtButton :loading="saveLoad" @click="confirm" class="button" type="primary"
-        >发布工单</AtButton
+      <nut-button
+        :loading="saveLoad"
+        @click="confirm"
+        class="button"
+        type="info"
+        >发布工单</nut-button
       >
     </view>
   </view>
@@ -91,17 +133,23 @@ import { ref } from "vue";
 import Taro, { useLoad } from "@tarojs/taro";
 import { useUploadImg } from "../../hooks/useUploadImg";
 import "./index.scss";
-import {toast} from '../../utils'
+import { toast } from "../../utils";
 import { fetchItemsList } from "../../api/project";
 import api from "../../api";
-import { post } from "../../api/request";
+import { post, get } from "../../api/request";
 import { useUserInfo } from "../../hooks/useUserInfo";
+import globalData from '../../utils/globalData';
 
 const { chooseImgs, uploadImg } = useUploadImg();
 const imgList = ref([]);
 const itemList = ref([]);
 const saveLoad = ref(false);
 const projectPickerIndex = ref(0);
+const timeList = ref(["立即上门", "预约时间"]);
+const timePickerIndex = ref(0);
+const applyTime = ref(new Date());
+const minDate = ref(new Date());
+const showTimePicker = ref(false);
 
 const formData = ref({
   contactNumber: "",
@@ -116,7 +164,11 @@ const formData = ref({
 const maxImgAmount = 9;
 
 useLoad(() => {
+  // 获取项目列表
   getItemList();
+
+  // 获取用户信息
+  getUserDetail();
 });
 
 function getItemList() {
@@ -159,9 +211,22 @@ function prewImg(url) {
 }
 
 function getLocation() {
-  Taro.getLocation().then(res => {
-    console.log(111, res)
-  })
+  Taro.chooseLocation().then((res) => {
+    if (res.errMsg === "chooseLocation:ok") {
+      formData.value.maintenanceAddress = res.address;
+    }
+  });
+}
+
+function formatDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  const second = String(date.getSeconds()).padStart(2, '0');
+
+  return (`${year}-${month}-${day} ${hour}:${minute}:${second}`)
 }
 
 function confirm() {
@@ -171,26 +236,50 @@ function confirm() {
   formData.value.projectId = itemList.value[projectPickerIndex.value].projectId;
   formData.value.problemImage = imgList.value.join();
 
-  formData.value.maintenanceAddress = '河南省开封市';
-  formData.value.makeAppointmentTimeStr = '2023-01-03 15:30:25';
+  if(timeList.value[timePickerIndex.value] === '预约时间') {
+    formData.value.makeAppointmentTimeStr = formatDate(applyTime.value);
+  } else {
+    formData.value.makeAppointmentTimeStr = "立即上门";
+  }
 
-  post(api.submitApply, formData.value).then(res => {
+  console.log(111, formData.value);
+  
+
+  post(api.submitApply, formData.value).then((res) => {
     saveLoad.value = false;
-    if(res.success) {
-      toast('发布成功');
+    if (res.success) {
+      toast("发布成功");
       setTimeout(() => {
         Taro.navigateBack({
-          delta: 1
-        })
-      }, 1500)
+          delta: 1,
+        });
+      }, 1500);
     } else {
       toast(res.message);
     }
-  })
-
+  });
 }
 
 function changeProjectPicker(e) {
   projectPickerIndex.value = e.detail.value;
 }
+
+function changeTimePicker(e) {
+  timePickerIndex.value = e.detail.value;
+  if (timeList.value[e.detail.value] === "预约时间") {
+    showTimePicker.value = true;
+  }
+}
+
+function getUserDetail() {
+  get(api.userDetail).then((res) => {
+    if (res.success) {
+      formData.value.contactPerson = res.result.nickName;
+      formData.value.contactNumber = res.result.phone;
+    } else {
+      toast(res.message);
+    }
+  });
+}
+
 </script>

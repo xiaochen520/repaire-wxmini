@@ -10,13 +10,7 @@
     </view>
 
     <view class="confirm-btn">
-      <AtButton
-        :disabled="buttonDisabled"
-        :loading="saveLoad"
-        @click="confirm"
-        type="primary"
-        >登录</AtButton
-      >
+      <nut-button class="button" @click="confirm" :disabled="buttonDisabled" :loading="saveLoad" type="info">登录</nut-button>
     </view>
   </view>
 </template>

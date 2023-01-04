@@ -4,23 +4,23 @@ page {
 }
 .my {
     .top {
-        padding: 24px;
+        padding: 12px;
         background-color: #6190E8;
         color: #fff;
         .head-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 120px;
-            margin-right: 24px;
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            margin-right: 6px;
         }
 
         .name {
-            font-size: 36px;
+            font-size: 18px;
             font-weight: bold;
         }
     }
     .menu {
-        padding: 24px 0;
+        padding: 12px 0;
         text-align: center;
         background-color: #6190E8;
         color: #fff;
@@ -31,44 +31,44 @@ page {
             left: 0;
             top: 0;
             right: 0;
-            height: 2px;
+            height: 1px;
             transform: scaleY(0.5);
             background-color: #FAFBFC;
         }
         &-item {
             width: 50%;
             .amount {
-                font-size: 48px;
+                font-size: 24px;
                 font-weight: bold;
             }
             .text {
-                font-size: 32px;
-                margin-top: 8px;
+                font-size: 16px;
+                margin-top: 4px;
             }
         }
     }
 
     .utils {
-        margin-top: 24px;
-        padding: 0 24px;
+        margin-top: 12px;
+        padding: 0 12px;
         .title {
-            font-size: 32px;
+            font-size: 16px;
             font-weight: bold;
             color: #333;
         }
         .list {
-            margin-top: 42px;
+            margin-top: 20px;
             background-color: #fff;
-            border-radius: 24px;
-            padding: 24px 0;
+            border-radius: 6px;
+            padding: 12px 0;
             .item {
                 width: 25%;
                 .u-icon {
-                    width: 70px;
-                    height: 70px;
+                    width: 35px;
+                    height: 35px;
                 }
                 .u-text {
-                    font-size: 30px;
+                    font-size: 14px;
                     color: #666;
                     margin-top: 12px;
                 }
@@ -77,10 +77,14 @@ page {
     }
 
     .exit-btn {
-        margin-top: 120px;
-        padding: 0 24px;
+        margin-top: 30px;
+        padding: 0 12px;
         .exchange {
-            margin-bottom: 24px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+        .exit {
+            width: 100%;
         }
     }
 }

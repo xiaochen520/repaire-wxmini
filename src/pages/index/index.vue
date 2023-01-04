@@ -9,7 +9,7 @@
         <image class="icon" src="../../imgs/pin.png"></image>
         <view class="text">待派单</view>
       </view>
-      <view class="nav-item" v-if="ower" @tap="goRouter({ url: '/pages/apply/index' })">
+      <view class="nav-item" v-if="!isLogin || ower" @tap="goRouterBylogin({ url: '/pages/apply/index' })">
         <image class="icon" src="../../imgs/pin.png"></image>
         <view class="text">维保申请</view>
       </view>
@@ -36,27 +36,27 @@
 
     <view class="menu">
       <view class="outer flex">
-        <view v-if="service" @tap="goRouter({ url: '/pages/order/index?status=2' })" class="menu-item flex-1">
+        <view v-if="service" @tap="goRouterBylogin({ url: '/pages/order/index?status=2' })" class="menu-item flex-1">
           <view class="data">{{orderData.receiveCount || 0}}</view>
           <view class="text">待接单</view>
         </view>
-        <view @tap="goRouter({ url: '/pages/order/index?status=3' })" class="menu-item flex-1" v-if="service || manager">
+        <view @tap="goRouterByWait" class="menu-item flex-1" v-if="service || manager">
           <view class="data">{{orderData.dealWithCount || 0}}</view>
           <view class="text">待处理</view>
         </view>
-        <view @tap="goRouter({ url: '/pages/order/index?status=5' })" class="menu-item flex-1" v-if="manager">
+        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=5' })" class="menu-item flex-1" v-if="manager">
           <view class="data">{{orderData.completedCount || 0}}</view>
           <view class="text">已完成</view>
         </view>
-        <view @tap="goRouter({ url: '/pages/order/index?status=1,2,3,4' })" v-if="ower" class="menu-item flex-1">
+        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=1,2,3,4' })" v-if="!isLogin || ower" class="menu-item flex-1">
           <view class="data">{{orderData.maintenanceCount || 0}}</view>
           <view class="text">待维保</view>
         </view>
-        <view @tap="goRouter({ url: '/pages/order/index?status=4' })" class="menu-item flex-1" v-if="service || ower">
+        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=4' })" class="menu-item flex-1" v-if="service || ower || !isLogin">
           <view class="data">{{orderData.acceptanceCount || 0}}</view>
           <view class="text">待验收</view>
         </view>
-        <view @tap="goRouter({ url: '/pages/order/index?status=5' })" class="menu-item flex-1" v-if="ower">
+        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=5' })" class="menu-item flex-1" v-if="ower || !isLogin">
           <view class="data">{{orderData.evaluationCount || 0}}</view>
           <view class="text">待评价</view>
         </view>
@@ -75,7 +75,7 @@
       :autoplay="true"
     >
       <swiper-item v-for="(item, index) in bannerList" :key="index">
-        <image class="banner-img" :src="item.imgUrl"></image>
+        <image @tap="goRouter({ url: '/pages/newDetail/index?id=' + item.id })" class="banner-img" :src="item.imgUrl"></image>
       </swiper-item>
     </swiper>
 
@@ -89,7 +89,7 @@
       </view>
 
       <view class="news-list">
-        <view v-for="(item, index) in newsList" :key="index" class="news-item">
+        <view @tap="goRouter({ url: '/pages/newDetail/index?id=' + item.id })" v-for="(item, index) in newsList" :key="index" class="news-item">
           <view class="news-item-title">{{ item.title }}</view>
           <view class="news-item-desc">{{ item.announcementAbstract }}</view>
           <view class="news-item-foot flex-m">
@@ -134,6 +134,16 @@ const goRouter = _goRouter;
 function goRouterBylogin(option) {
   if(isLogin.value) {
     goRouter(option);
+  } else {
+    goRouter({url: `../author/index?from=/pages/index/index` });
+  }
+}
+
+function goRouterByWait() {
+  if(manager.value) {
+    goRouterBylogin({ url: '/pages/order/index?status=1,6' });
+  } else {
+    goRouterBylogin({ url: '/pages/order/index?status=3' });
   }
 }
 </script>
