@@ -13,12 +13,12 @@
 <script setup>
 import { ref } from "vue";
 import "./index.scss";
-import Taro, { useDidShow } from "@tarojs/taro";
+import Taro, { useDidShow, useReachBottom } from "@tarojs/taro";
 import { fetchNewsList } from "../../api/news";
-import { goRouter as _goRouter } from "../../utils/index";
-
+import { goRouter as _goRouter, loading } from "../../utils/index";
 
 const newsList = ref([]);
+const hasMore = ref(true);
 const page = 0;
 const pageSize = 10;
 const goRouter = _goRouter;
@@ -27,7 +27,15 @@ useDidShow(() => {
   getList();
 });
 
+useReachBottom(() => {
+  if(hasMore.value) {
+    page += 1;
+    getList();
+  }
+});
+
 function getList() {
+  loading();
   const par = {
     pageNo: page,
     pageSize: pageSize,
@@ -35,8 +43,14 @@ function getList() {
   };
 
   fetchNewsList(par).then((res) => {
+    Taro.hideLoading();
     if (res.success) {
       newsList.value = {...newsList.value, ...res.result};
+      if(res.result.length) {
+        hasMore.value = true;
+      } else {
+        hasMore.value = false;
+      }
     } else {
       toast(res.message);
     }

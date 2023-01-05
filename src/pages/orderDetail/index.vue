@@ -90,9 +90,9 @@
       >
     </view>
 
-    <view v-if="ower && orderInfo.status === 4" class="footer flex-m">
-      <AtButton class="button flex-1" type="primary">确认</AtButton>
-      <AtButton class="button flex-1" type="primary">拒绝</AtButton>
+    <view v-if="ower && orderInfo.status === 999" class="footer flex-m">
+      <nut-button @click="uncheckOrder" class="button flex-1" type="default">不通过</nut-button>
+      <nut-button :loading="checkLoad" class="button flex-1" @click="checkOrder" type="info">验收通过</nut-button>
     </view>
 
     <!-- 拒绝弹框 -->
@@ -130,6 +130,18 @@
         </view>
       </view>
     </nut-popup>
+
+    <!-- 验收不通过 -->
+    <nut-popup closeable position="bottom" v-model:visible="showUncheckModal">
+      <view class="refuse-modal">
+        <view class="title">验收不通过</view>
+        <view class="sub-title">不通过原因</view>
+        <textarea v-model="uncheckContent" class="textarea" cols="30" rows="10"></textarea>
+        <view class="r-button-box">
+          <nut-button @click="_uncheckOrder" :loading="uncheckLoad" class="r-button" type="info">确认</nut-button>
+        </view>
+      </view>
+    </nut-popup>
   </view>
 </template>
 
@@ -156,7 +168,11 @@ const orderStatus = ref(ORDER_STATUS);
 const showCloseModal = ref(false);
 const overLoad = ref(false);
 const showOverModal = ref(false);
+const uncheckLoad = ref(false);
+const checkLoad = ref(false);
+const showUncheckModal = ref(false);
 const refuseContent = ref('');
+const uncheckContent = ref('');
 const overContent = ref('');
 const closeContent = ref('');
 const showRefuseModal = ref(false);
@@ -307,6 +323,56 @@ function _overOrder() {
     showOverModal.value = false;
     if(res.success) {
       toast('已确认');
+      setTimeout(() => {
+        Taro.navigateBack({delta: 1});
+      }, 1500)
+    } else {
+      toast(res.message);
+    }
+  });
+}
+
+// 业主
+function checkOrder() {
+  if(checkLoad.value) return;
+  checkLoad.value = true;
+  const par = {
+    content: '',
+    orderId: orderInfo.value.id,
+    status: 1
+  };
+
+  post(api.ownerCompleteOrder, par).then(res => {
+    checkLoad.value = false;
+    if(res.success) {
+      toast('验收通过');
+      setTimeout(() => {
+        Taro.navigateBack({delta: 1});
+      }, 1500)
+    } else {
+      toast(res.message);
+    }
+  });
+}
+
+function uncheckOrder() {
+  showUncheckModal.value = true;
+}
+
+function _uncheckOrder() {
+  if(uncheckLoad.value) return;
+  uncheckLoad.value = true;
+  const par = {
+    content: uncheckContent.value,
+    orderId: orderInfo.value.id,
+    status: 2
+  };
+
+  post(api.ownerCompleteOrder, par).then(res => {
+    uncheckLoad.value = false;
+    showUncheckModal.value = false;
+    if(res.success) {
+      toast('验收不通过');
       setTimeout(() => {
         Taro.navigateBack({delta: 1});
       }, 1500)

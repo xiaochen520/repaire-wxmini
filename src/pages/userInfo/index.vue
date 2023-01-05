@@ -2,7 +2,7 @@
   <view class="user-info">
     <view class="head flex-m row">
       <view class="text flex-1">头像</view>
-      <image class="head-img" src="https://img1.baidu.com/it/u=1403245892,3051757811&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"></image>
+      <image class="head-img" :src="userInfo.headPortrait"></image>
     </view>
 
     <view @tap="goRouter({url: '/pages/editUser/index?key=nickName'})" class="row flex-m">

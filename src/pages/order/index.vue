@@ -8,7 +8,7 @@
           <view class="desc">项目名称：{{item.projectName}}</view>
           <view class="desc">下单时间：{{item.createTime}}</view>
         </view>
-        <nut-button @click="goRouter({url: '/pages/orderDetail/index?id=' + item.id})" size="small" type="info">详情</nut-button>
+        <nut-button @click.stop="goRouter({url: '/pages/orderDetail/index?id=' + item.id})" size="small" type="info">详情</nut-button>
       </view>
     </view>
   </view>
@@ -18,7 +18,6 @@
 import { ref } from "vue";
 import "./index.scss";
 import Taro, { useLoad, useDidShow } from "@tarojs/taro";
-import { fetchNewsList } from "../../api/news";
 import {post} from '../../api/request'
 import api from '../../api'
 import {useUserInfo} from '../../hooks/useUserInfo'
@@ -27,17 +26,18 @@ import {ORDER_STATUS} from '../../constant'
 
 const { role } = useUserInfo();
 const orderList = ref([]);
-const page = 0;
+let page = 0;
 const pageSize = 10;
 let statusQuery = '';
 
 useLoad(option => {
   statusQuery = option.status;
-  console.log(111, statusQuery)
   Taro.setNavigationBarTitle({title: ORDER_STATUS[statusQuery] || '全部工单'});
 });
 
 useDidShow(() => {
+  page = 0;
+  orderList.value = [];
   getList();
 });
 

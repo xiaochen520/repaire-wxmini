@@ -14,13 +14,7 @@
     </view>
 
     <view class="confirm-btn">
-      <AtButton
-        :disabled="buttonDisabled"
-        :loading="saveLoad"
-        @click="confirm"
-        type="primary"
-        >确认</AtButton
-      >
+      <nut-button class="button" :disabled="buttonDisabled" :loading="saveLoad" @click="confirm" type="info">确认</nut-button>
     </view>
   </view>
 </template>

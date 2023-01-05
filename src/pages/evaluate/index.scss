@@ -1,0 +1,36 @@
+page {
+    background-color: #F7F8FA;
+    min-height: 100%;
+}
+
+.evaluate {
+    padding: 12px;
+    .outer {
+        background-color: #FFFFFF;
+        border-radius: 6px;
+        padding: 12px;
+    }
+    .row {
+        .label {
+            font-size: 16px;
+        }
+    }
+    .title {
+        font-size: 16px;
+        margin-top: 12px;
+    }
+
+    .textarea {
+        width: 100%;
+        margin-top: 12px;
+        background-color: #F7F8FA;
+        border-radius: 6px;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    .confirm-btn {
+        width: 100%;
+        margin-top: 50px;
+    }
+}

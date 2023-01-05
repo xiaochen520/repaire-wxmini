@@ -57,11 +57,11 @@
 </template>
 
 <script setup>
-import Taro, { useTabItemTap, useDidShow } from "@tarojs/taro";
-import { ref, watchEffect } from "vue";
+import Taro, { useDidShow } from "@tarojs/taro";
+import { ref } from "vue";
 import globalData from "../../utils/globalData";
 import api from "../../api";
-import { get, post } from "../../api/request";
+import { get } from "../../api/request";
 import { goRouter as _goRouter, toast, setStorageData } from "../../utils";
 import { useUserInfo } from "../../hooks/useUserInfo";
 import "./index.scss";
@@ -87,12 +87,7 @@ useDidShow(() => {
   } else {
     globalData.userInfo = null;
     userInfo.value = {};
-  }
-});
-
-useTabItemTap((item) => {
-  if (!isLogin.value) {
-    Taro.redirectTo({ url: `../author/index?from=/pages/my/index` });
+    Taro.navigateTo({ url: `../author/index?from=/pages/my/index` });
   }
 });
 
@@ -141,7 +136,7 @@ function exitLogin() {
       Taro.removeStorageSync("token");
       Taro.removeStorageSync("roleList");
       Taro.removeStorageSync("role");
-      Taro.redirectTo({ url: `../author/index?from=/pages/my/index` });
+      Taro.navigateTo({ url: `../author/index?from=/pages/my/index` });
     }
   });
 }

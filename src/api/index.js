@@ -23,4 +23,6 @@ export default {
     managerDispatchOrder: base + "/maintenanceapi/maintenanceorder/managerDispatchOrder", //经理派单
     repairReceiveOrder: base + "/maintenanceapi/maintenanceorder/repairReceiveOrder", //维修员拒绝
     repairCompleteOrder: base + "/maintenanceapi/maintenanceorder/repairCompleteOrder", //维修员完成
+    ownerCompleteOrder: base + "/maintenanceapi/maintenanceorder/ownerCompleteOrder", //业主验收
+    ownerEvaluationOrder: base + "/maintenanceapi/maintenanceorder/ownerEvaluationOrder", //评价
 }

@@ -48,11 +48,11 @@
           <view class="data">{{orderData.completedCount || 0}}</view>
           <view class="text">已完成</view>
         </view>
-        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=1,2,3,4' })" v-if="!isLogin || ower" class="menu-item flex-1">
+        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=1,2,3' })" v-if="!isLogin || ower" class="menu-item flex-1">
           <view class="data">{{orderData.maintenanceCount || 0}}</view>
           <view class="text">待维保</view>
         </view>
-        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=4' })" class="menu-item flex-1" v-if="service || ower || !isLogin">
+        <view @tap="goRouterBylogin({ url: '/pages/order/index?status=999' })" class="menu-item flex-1" v-if="service || ower || !isLogin">
           <view class="data">{{orderData.acceptanceCount || 0}}</view>
           <view class="text">待验收</view>
         </view>

@@ -87,7 +87,7 @@
       >
         <view class="form-row flex-m">
           <view class="label require">上门时间：</view>
-          <view class="flex-1">{{ timeList[timePickerIndex] }}</view>
+          <view class="flex-1">{{ timeList[timePickerIndex] === '预约时间' ? formatDate(applyTime) : timeList[timePickerIndex] }}</view>
           <view class="at-icon at-icon-chevron-right"></view>
         </view>
       </picker>
@@ -229,10 +229,48 @@ function formatDate(date) {
   return (`${year}-${month}-${day} ${hour}:${minute}:${second}`)
 }
 
+function checkform() {
+  if(!formData.value.projectId) {
+    toast('请选择项目');
+    return false;
+  }
+
+  if(!formData.value.problemDescribe) {
+    toast('请输入问题描述');
+    return false;
+  }
+
+  if(!formData.value.maintenanceAddress) {
+    toast('请选择维保地址');
+    return false;
+  }
+
+  if(!formData.value.maintenanceHouseNumber) {
+    toast('请输入门牌号');
+    return false;
+  }
+
+  if(!formData.value.makeAppointmentTimeStr) {
+    toast('请选择上门时间');
+    return false;
+  }
+
+  if(!formData.value.contactPerson) {
+    toast('请输入联系人');
+    return false;
+  }
+
+  if(!formData.value.contactNumber) {
+    toast('请输入联系电话');
+    return false;
+  }
+
+  return true;
+}
+
 function confirm() {
   if (saveLoad.value) return;
-  saveLoad.value = true;
-
+  
   formData.value.projectId = itemList.value[projectPickerIndex.value].projectId;
   formData.value.problemImage = imgList.value.join();
 
@@ -242,8 +280,8 @@ function confirm() {
     formData.value.makeAppointmentTimeStr = "立即上门";
   }
 
-  console.log(111, formData.value);
-  
+  if(!checkform()) return;
+  saveLoad.value = true;
 
   post(api.submitApply, formData.value).then((res) => {
     saveLoad.value = false;
