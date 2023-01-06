@@ -3,8 +3,8 @@ import globalData from '../utils/globalData';
 import api from '../api'
 export function useUploadImg() {
 
-  function chooseImgs() {
-    return Taro.chooseImage().then(res => {
+  function chooseImgs(options = {}) {
+    return Taro.chooseImage(options).then(res => {
       if (res.errMsg === "chooseImage:ok") {
         return Promise.resolve(res.tempFilePaths);
       } else {
