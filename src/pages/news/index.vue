@@ -19,7 +19,7 @@ import { goRouter as _goRouter, loading } from "../../utils/index";
 
 const newsList = ref([]);
 const hasMore = ref(true);
-const page = 0;
+let page = 1;
 const pageSize = 10;
 const goRouter = _goRouter;
 

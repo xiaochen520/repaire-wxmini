@@ -1,6 +1,6 @@
 <template>
   <view class="feedback">
-    <textarea v-model="content" placeholder="请填写您的宝贵意见" :maxlength="200" class="textarea"></textarea>
+    <nut-textarea v-model="content" placeholder="请填写您的宝贵意见" class="textarea" limit-show max-length="200" />
     <view class="upload-title flex-b">
       <view class="w">上传照片</view>
       <view>最多上传9张照片</view>
@@ -15,7 +15,9 @@
       </view>
     </view>
 
-    <AtButton :loading="saveLoad" @click="confirm" class="confirm-btn" type='primary'>提交</AtButton>
+    <view class="confirm-btn">
+      <nut-button class="button" :loading="saveLoad" @click="confirm" type="info">提交</nut-button>
+    </view>
   </view>
 </template>
 

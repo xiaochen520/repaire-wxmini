@@ -7,7 +7,7 @@ page {
         background: #fff;
         border-radius: 6px;
         font-size: 16px;
-        padding: 12px;
+        padding: 12px 12px 30px;
         box-sizing: border-box;
     }
 
@@ -53,5 +53,8 @@ page {
 
     .confirm-btn {
         margin-top: 60px;
+        .button {
+            width: 100%;
+        }
     }
 }

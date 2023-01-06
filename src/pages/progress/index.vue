@@ -44,14 +44,14 @@ import { goRouter, loading, toast } from "../../utils/index";
 const { isLogin, role, project } = useUserInfo();
 const list = ref([]);
 const hasMore = ref(true);
-let page = 0;
+let page = 1;
 const pageSize = 10;
 const ower = computed(() => {
   return role.value && role.value.roleId === 104;
 });
 
 useDidShow(() => {
-  page = 0;
+  page = 1;
   list.value = [];
   getList();
 });

@@ -32,12 +32,13 @@
 
 <script setup>
 import { ref } from "vue";
-import { goRouter as _goRouter } from "../../utils";
+import { goRouter as _goRouter, loading, toast } from "../../utils";
 import { useUploadImg } from "../../hooks/useUploadImg";
 import Taro, { useDidShow } from "@tarojs/taro";
 import "./index.scss";
 import globalData from "../../utils/globalData";
 import { get, post } from "../../api/request";
+import { editUser } from "../../api/userInfo";
 import api from "../../api";
 
 const { chooseImgs, uploadImg } = useUploadImg();
@@ -48,13 +49,35 @@ useDidShow(() => {
   userInfo.value = { ...globalData.userInfo };
 });
 
-
 function updateHead() {
-  chooseImgs({count: 1}).then(res => {
-    return uploadImg(res);
-  }).then(res => {
-    console.log(res)
-  });
+  let headImg = '';
+  chooseImgs({ count: 1 })
+    .then((res) => {
+      loading();
+      return uploadImg(res);
+    })
+    .then((res) => {
+      const r = res[0];
+      if (r?.errMsg === "uploadFile:ok") {
+        headImg = JSON.parse(r.data);
+        const params = {
+          headPortrait: headImg?.fileName,
+          nickName: globalData.userInfo?.nickName || "",
+          phone: globalData.userInfo?.phone || "",
+        };
+        return editUser(params);
+      } else {
+        Taro.hideLoading();
+      }
+    }).then(res => {
+      Taro.hideLoading();
+      if(res.success) {
+        globalData.userInfo.headPortrait = headImg?.url;
+        userInfo.value.headPortrait = headImg?.url;
+        toast('修改头像成功');
+      }
+    }).catch(err => {
+      Taro.hideLoading();
+    });
 }
-
 </script>

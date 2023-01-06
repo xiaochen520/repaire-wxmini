@@ -17,16 +17,17 @@
 <script setup>
 import { ref } from "vue";
 import "./index.scss";
-import Taro, { useLoad, useDidShow } from "@tarojs/taro";
+import Taro, { useLoad, useDidShow, useReachBottom } from "@tarojs/taro";
 import {post} from '../../api/request'
 import api from '../../api'
 import {useUserInfo} from '../../hooks/useUserInfo'
-import { goRouter, loading } from "../../utils/index";
+import { goRouter, loading, toast } from "../../utils/index";
 import {ORDER_STATUS} from '../../constant'
 
 const { role } = useUserInfo();
 const orderList = ref([]);
-let page = 0;
+const hasMore = ref(true);
+let page = 1;
 const pageSize = 10;
 let statusQuery = '';
 
@@ -36,9 +37,16 @@ useLoad(option => {
 });
 
 useDidShow(() => {
-  page = 0;
+  page = 1;
   orderList.value = [];
   getList();
+});
+
+useReachBottom(() => {
+  if(hasMore.value) {
+    page += 1;
+    getList();
+  }
 });
 
 function getList() {
@@ -52,13 +60,19 @@ function getList() {
 
   if(par.status == 10) {
     par.status = '';
-    par.month = `${new Date().getFullYear()}/${String(new Date().getMonth() + 1).padStart(2, '0')}`;
+    par.month = `${new Date().getFullYear()}${String(new Date().getMonth() + 1).padStart(2, '0')}`;
   }
 
   post(api.selectOrderList, par).then((res) => {
     Taro.hideLoading();
     if (res.success) {
       orderList.value = {...orderList.value, ...res.result};
+      if(res.result.length) {
+        hasMore.value = true;
+      } else {
+        hasMore.value = false;
+        toast('没有更多了');
+      }
     } else {
       toast(res.message);
     }

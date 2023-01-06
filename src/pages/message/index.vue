@@ -21,12 +21,12 @@ import { goRouter as _goRouter, loading, toast } from "../../utils/index";
 
 const msgList = ref([]);
 const hasMore = ref(true);
-let page = 0;
+let page = 1;
 const pageSize = 10;
 const goRouter = _goRouter;
 
 useDidShow(() => {
-  page = 0;
+  page = 1;
   msgList.value = [];
   getList();
 });
